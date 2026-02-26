@@ -26,11 +26,18 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
 
-      - name: Install Playwright browser binary
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium" -D exec.classpathScope=test
+      - name: Build project
+        run: mvn compile -DskipTests
 
       - name: Install Playwright system dependencies
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps chromium" -D exec.classpathScope=test
+        run: |
+          mvn dependency:resolve
+          PLAYWRIGHT_CLI=$(find ~/.m2 -name "playwright-*.jar" | head -1)
+          java -jar $PLAYWRIGHT_CLI install chromium
+          java -jar $PLAYWRIGHT_CLI install-deps chromium
+
+      - name: Run test suite
+        run: mvn test
 
       - name: Build project
         run: mvn compile
