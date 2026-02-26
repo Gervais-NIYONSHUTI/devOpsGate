@@ -26,22 +26,13 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
 
-      - name: Build project
-        run: mvn compile -DskipTests
-
       - name: Install dependencies
         run: mvn clean install -DskipTests
 
       - name: Install Playwright browsers
-        run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
+        run: |
+          PLAYWRIGHT_JAR=$(find ~/.m2/repository/com/microsoft/playwright -name "playwright-*.jar" | grep -v sources | grep -v javadoc | head -1)
+          java -cp $PLAYWRIGHT_JAR com.microsoft.playwright.CLI install chromium --with-deps
 
-      - name: Build and Run Tests
+      - name: Run tests
         run: mvn test
-
-      - name: Upload Surefire reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: surefire-reports
-          path: target/surefire-reports/
-          retention-days: 7
