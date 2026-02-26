@@ -29,20 +29,13 @@ jobs:
       - name: Build project
         run: mvn compile -DskipTests
 
-      - name: Install Playwright system dependencies
-        run: |
-          mvn dependency:resolve
-          PLAYWRIGHT_CLI=$(find ~/.m2 -name "playwright-*.jar" | head -1)
-          java -jar $PLAYWRIGHT_CLI install chromium
-          java -jar $PLAYWRIGHT_CLI install-deps chromium
+      - name: Install dependencies
+        run: mvn clean install -DskipTests
 
-      - name: Run test suite
-        run: mvn test
+      - name: Install Playwright browsers
+        run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
-      - name: Build project
-        run: mvn compile
-
-      - name: Run test suite
+      - name: Build and Run Tests
         run: mvn test
 
       - name: Upload Surefire reports
