@@ -1,38 +1,43 @@
-name: CI Pipeline
+name: Playwright Java CI Pipeline
 
 on:
   push:
-    branches: ["**"]
+    branches:
+      - main
+      - dev
+      - 'ft/**'
   pull_request:
-    branches: ["**"]
+    branches:
+      - main
+      - dev
 
-jobs:
+jobs: 
   build-and-test:
-    name: Build & Test
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: "21"
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Cache Maven packages
+      - name: Cache Maven dependencies
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
 
       - name: Install dependencies
         run: mvn clean install -DskipTests
 
       - name: Install Playwright browsers
-        run: |
-          PLAYWRIGHT_JAR=$(find ~/.m2/repository/com/microsoft/playwright -name "playwright-*.jar" | grep -v sources | grep -v javadoc | head -1)
-          java -cp $PLAYWRIGHT_JAR com.microsoft.playwright.CLI install chromium --with-deps
+        run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
-      - name: Run tests
+      - name: Build and Run Tests
         run: mvn test
