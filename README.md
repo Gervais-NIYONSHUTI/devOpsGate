@@ -229,6 +229,60 @@ branch 'ft/setup' set up to track 'origin/ft/setup'.
 ```
 # Part 10
 ```
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (main)
+$ git add .
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (main)
+$ git commit -m "morning rwanda"
+[main 9b1a622] morning rwanda
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (main)
+$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 306 bytes | 306.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Gervais-NIYONSHUTI/devOpsGate.git
+   5da8a82..9b1a622  main -> main
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (main)
+$ git switch ft/setup
+Switched to branch 'ft/setup'
+Your branch is up to date with 'origin/ft/setup'.
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git merge main
+Updating 9cca790..9b1a622
+Fast-forward
+ Test.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git status
+On branch ft/setup
+Your branch is ahead of 'origin/ft/setup' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git commit -m "fix(merge): resolve conflict between main and ft/setup"
+On branch ft/setup
+Your branch is ahead of 'origin/ft/setup' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git push
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Gervais-NIYONSHUTI/devOpsGate.git
+   9cca790..9b1a622  ft/setup -> ft/setup
+```
 
 
 
