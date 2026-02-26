@@ -198,6 +198,37 @@ index f393a93..713df61 100644
 :
 
 ```
+# Part 9
+```
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git add .
+warning: in the working copy of 'Test.java', LF will be replaced by CRLF the next time Git touches it
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git commit -m "restored stashed changes"
+[ft/setup 4ccb3c3] restored stashed changes
+ 4 files changed, 222 insertions(+), 3 deletions(-)
+ create mode 100644 Test.java
+
+hirwa@PC MINGW64 /d/Cogito ergo sum/devOpsGate (ft/setup)
+$ git push -u origin ft/setup
+Enumerating objects: 34, done.
+Counting objects: 100% (34/34), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (23/23), done.
+Writing objects: 100% (32/32), 5.57 KiB | 951.00 KiB/s, done.
+Total 32 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), done.
+remote:
+remote: Create a pull request for 'ft/setup' on GitHub by visiting:
+remote:      https://github.com/Gervais-NIYONSHUTI/devOpsGate/pull/new/ft/setup
+remote:
+To https://github.com/Gervais-NIYONSHUTI/devOpsGate.git
+ * [new branch]      ft/setup -> ft/setup
+branch 'ft/setup' set up to track 'origin/ft/setup'.
+```
+# Part 10
+```
 
 
 
