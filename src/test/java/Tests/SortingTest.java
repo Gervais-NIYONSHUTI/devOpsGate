@@ -40,7 +40,6 @@ public class SortingTest {
 
     void sortBy(String value) {
         page.locator("[data-test='sort']").selectOption(new SelectOption().setValue(value));
-        page.waitForTimeout(5000);
     }
 
     List<String> getNames() {
